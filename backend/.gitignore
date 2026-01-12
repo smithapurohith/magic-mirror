@@ -1,0 +1,10 @@
+# secrets
+.env
+
+# virtual env
+venv/
+__pycache__/
+
+# generated images
+*.png
+*.jpg
