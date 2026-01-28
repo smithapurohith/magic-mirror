@@ -106,6 +106,17 @@ function App() {
 
     return (
         <div style={{ padding: "40px", textAlign: "center", background: "#0f172a", color: "white", minHeight: "100vh", fontFamily: "sans-serif" }}>
+
+            {/* Added style block to ensure mirrored view for webcam and results */}
+            <style>
+                {`
+                    video, canvas, .mirrored-image {
+                        transform: scaleX(-1);
+                        -webkit-transform: scaleX(-1);
+                    }
+                `}
+            </style>
+
             <h1 style={{ letterSpacing: "2px", color: "#fbbf24" }}>MAGIC MIRROR🪞</h1>
             <WebcamCapture ref={webcamRef} />
             <ControlPanel onSelect={handleSelect} />
@@ -143,14 +154,14 @@ function App() {
                 {capturedImage && (
                     <div style={{ position: "relative" }}>
                         <h3 style={{ color: "#fbbf24" }}>ORIGINAL PHOTO</h3>
-                        <img src={capturedImage} width="350" style={{ borderRadius: "12px", border: "2px solid #334155" }} />
+                        <img src={capturedImage} className="mirrored-image" width="350" style={{ borderRadius: "12px", border: "2px solid #334155" }} />
                         <button onClick={() => downloadImage(capturedImage, "captured.jpg")} style={{ display: "block", margin: "10px auto", padding: "5px 10px", cursor: "pointer", borderRadius: "5px", border: "none", backgroundColor: "#fbbf24" }}>Download</button>
                     </div>
                 )}
                 {images.avatar && (
                     <div style={{ position: "relative" }}>
                         <h3 style={{ color: "#fbbf24" }}>Avatar</h3>
-                        <img src={images.avatar} width="350" style={{ borderRadius: "12px", border: "4px solid #fbbf24" }} />
+                        <img src={images.avatar} className="mirrored-image" width="350" style={{ borderRadius: "12px", border: "4px solid #fbbf24" }} />
                         <button onClick={() => downloadImage(images.avatar, "avatar.jpg")} style={{ display: "block", margin: "10px auto", padding: "5px 10px", cursor: "pointer", borderRadius: "5px", border: "none", backgroundColor: "#fbbf24" }}>Download</button>
                     </div>
                 )}
@@ -162,7 +173,7 @@ function App() {
                         {["baby", "teenager", "middle-aged", "old-aged"].map(k => images[k] && (
                             <div key={k}>
                                 <h3 style={{ fontSize: "0.9rem", color: "#fbbf24", textTransform: "uppercase" }}>{k}</h3>
-                                <img src={images[k]} width="100%" style={{ borderRadius: "10px", boxShadow: "0 4px 15px rgba(0,0,0,0.5)" }} />
+                                <img src={images[k]} className="mirrored-image" width="100%" style={{ borderRadius: "10px", boxShadow: "0 4px 15px rgba(0,0,0,0.5)" }} />
                                 <button onClick={() => downloadImage(images[k], `${k}.jpg`)} style={{ margin: "10px auto", padding: "5px 10px", cursor: "pointer", borderRadius: "5px", border: "none", backgroundColor: "#fbbf24", width: "100%" }}>Download</button>
                             </div>
                         ))}
@@ -173,7 +184,7 @@ function App() {
             {(images.career || images.wildcard) && (
                 <div style={{ marginTop: "50px" }}>
                     <h3 style={{ textTransform: "uppercase", color: "#fbbf24" }}>TRANSFORMATION: {userInput}</h3>
-                    <img src={images.career || images.wildcard} width="550" style={{ borderRadius: "20px", border: "5px solid #fbbf24" }} />
+                    <img src={images.career || images.wildcard} className="mirrored-image" width="550" style={{ borderRadius: "20px", border: "5px solid #fbbf24" }} />
                     <button onClick={() => downloadImage(images.career || images.wildcard, "transformation.jpg")} style={{ display: "block", margin: "10px auto", padding: "10px 20px", cursor: "pointer", borderRadius: "5px", border: "none", backgroundColor: "#fbbf24" }}>Download Transformation</button>
                 </div>
             )}
