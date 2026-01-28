@@ -78,7 +78,3 @@ p {
     margin-bottom: 8px;
     font-weight: bold;
 }
-
-.generated {
-    filter: grayscale(100%) contrast(1.2) brightness(1.1);
-}
